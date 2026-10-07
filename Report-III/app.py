@@ -5,9 +5,8 @@ import bcrypt
 import json
 
 app = Flask(__name__)
-app.secret_key = 'srm12345'  # Replace with a random string for session security
+app.secret_key = 'srm12345'
 
-# Database connection
 def get_db_connection():
     try:
         connection = mysql.connector.connect(
@@ -21,13 +20,11 @@ def get_db_connection():
         print(f"Error connecting to MySQL: {e}")
         return None
 
-# Dashboard
 @app.route('/')
 @app.route('/dashboard')
 def dashboard():
     print(session)
     return render_template('dashboard.html')
-
 @app.route('/api/dashboard_stats', methods=['GET'])
 def get_dashboard_stats():
     conn = get_db_connection()
@@ -51,11 +48,9 @@ def get_dashboard_stats():
         "orders": orders
     })
 
-# Warehouse Management
 @app.route('/warehouses')
 def warehouses():
     return render_template('warehouses.html')
-
 @app.route('/api/warehouses', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def manage_warehouses():
     conn = get_db_connection()
@@ -101,11 +96,9 @@ def manage_warehouses():
         conn.close()
         return jsonify({"message": "Warehouse deleted"})
 
-# Product Management
 @app.route('/products')
 def products():
     return render_template('products.html')
-
 @app.route('/api/products', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def manage_products():
     conn = get_db_connection()
@@ -154,7 +147,6 @@ def manage_products():
         conn.close()
         return jsonify({"message": "Product deleted"})
 
-# Order Management
 @app.route('/orders')
 def orders():
     return render_template('orders.html')
@@ -203,11 +195,9 @@ def manage_orders():
         conn.close()
         return jsonify({"message": "Order added"})
     
-# Inventory Log
 @app.route('/inventory')
 def inventory():
     return render_template('inventory.html')
-
 @app.route('/api/inventory_logs', methods=['GET'])
 def get_inventory_logs():
     conn = get_db_connection()
@@ -232,11 +222,9 @@ def get_inventory_logs():
     conn.close()
     return jsonify(logs)
 
-# Temperature Log
 @app.route('/temperature')
 def temperature():
     return render_template('temperature.html')
-
 @app.route('/api/temperature_logs', methods=['GET'])
 def get_temperature_logs():
     conn = get_db_connection()
@@ -261,11 +249,9 @@ def get_temperature_logs():
     conn.close()
     return jsonify(logs)
 
-# Feedback
 @app.route('/feedback')
 def feedback():
     return render_template('feedback.html')
-
 @app.route('/api/feedback', methods=['GET', 'POST'])
 def manage_feedback():
     conn = get_db_connection()
@@ -291,6 +277,7 @@ def manage_feedback():
         cursor.close()
         conn.close()
         return jsonify({"message": "Feedback submitted"})
+
 @app.route('/api/stock_summary', methods=['GET'])
 def get_stock_summary():
     conn = get_db_connection()
