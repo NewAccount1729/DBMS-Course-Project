@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cold Storage Management{% endblock %}</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Animate.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="bg-gray-600 text-gray-100 flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-600 h-screen p-6 fixed">
+        <h1 class="text-2xl font-bold mb-8">Cold Storage</h1>
+        <nav>
+            <a href="/dashboard" class="block py-2 px-4 mb-2 hover:bg-blue-600">Dashboard</a>
+            <a href="/warehouses" class="block py-2 px-4 mb-2 hover:bg-blue-600">Warehouses</a>
+            <a href="/products" class="block py-2 px-4 mb-2 hover:bg-blue-600">Products</a>
+            <a href="/orders" class="block py-2 px-4 mb-2 hover:bg-blue-600">Orders</a>
+            <a href="/inventory" class="block py-2 px-4 mb-2 hover:bg-blue-600">Inventory Logs</a>
+            <a href="/temperature" class="block py-2 px-4 mb-2 hover:bg-blue-600">Temperature Logs</a>
+            <a href="/feedback" class="block py-2 px-4 mb-2 hover:bg-blue-600">Feedback</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 p-8 w-full">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- JavaScript -->
+    <!-- <script src="/static/scripts.js"></script> -->
+    <script>
+    function animateCounter(id, target) {
+        let count = 0;
+        const element = document.getElementById(id);
+        const increment = target / 50;
+        const interval = setInterval(() => {
+            count += increment;
+            if (count >= target) {
+                count = target;
+                clearInterval(interval);
+            }
+            element.textContent = Math.round(count);
+            }, 20);
+        }
+    </script>
+</body>
+</html>
