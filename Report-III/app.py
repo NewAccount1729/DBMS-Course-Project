@@ -273,9 +273,9 @@ def manage_feedback():
         return jsonify({"error": "Database connection failed"}), 500
     
     cursor = conn.cursor(dictionary=True)
-    
+    id = 1
     if request.method == 'GET':
-        cursor.execute("SELECT FeedbackID, Comment, Rating, Feedback_Date FROM feedback WHERE UserID = %s", (session['user_id'],))
+        cursor.execute("SELECT FeedbackID, Comment, Rating, Feedback_Date FROM feedback WHERE UserID = %s", (id,))
         feedback = cursor.fetchall()
         cursor.close()
         conn.close()
@@ -286,7 +286,7 @@ def manage_feedback():
         cursor.execute("""
             INSERT INTO feedback (UserID, Comment, Rating, Feedback_Date)
             VALUES (%s, %s, %s, NOW())
-        """, (session['user_id'], data['Comment'], data['Rating']))
+        """, (id, data['Comment'], data['Rating']))
         conn.commit()
         cursor.close()
         conn.close()
