@@ -274,7 +274,7 @@ The data dictionary below details the table structures, data types, constraints,
   [*Field*], [*Type*], [*Constraint*], [*Description*],
   [OrderID], [INT], [PRIMARY KEY, AUTO_INC], [Unique customer purchase order ID],
   [CustomerID], [INT], [FK -> customer(CustomerID)], [Ordering customer reference],
-  [Order_Date], [DATETIME], [DEFAULT CURRENT_TIMESTAMP], [Order placement timestamp],
+  [Order_Date], [DATETIME], text(size: 8pt)[DEFAULT CURRENT_TIMESTAMP], [Order placement timestamp],
   [Total_Amount], [DECIMAL(10,2)], [NOT NULL], [Gross monetary balance],
   [Status], [VARCHAR(50)], [DEFAULT 'Pending'], [Fulfillment workflow state],
 )
@@ -288,7 +288,7 @@ The data dictionary below details the table structures, data types, constraints,
   [ProductID], [INT], [FK -> product(ProductID)], [Referenced product item],
   [WarehouseID], [INT], [FK -> warehouse(WID)], [Destination warehouse ID],
   [Change_Quantity], [INT], [NOT NULL], [Quantity added (+) or removed (-)],
-  [Log_Date], [DATETIME], [DEFAULT CURRENT_TIMESTAMP], [Timestamp of inventory movement],
+  [Log_Date], [DATETIME], text(size: 8pt)[DEFAULT CURRENT_TIMESTAMP], [Timestamp of inventory movement],
   [Note], [VARCHAR(255)], [NULLABLE], [Reason for movement record],
 )
 
